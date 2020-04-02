@@ -61,3 +61,32 @@ exports.findAll = (req, res, next) => {
             });
     });
 };
+
+exports.update = (req, res, next) => {
+    if (!req.body) {
+        res.status(200).json({
+            message: "Request Can't be Empty...!"
+        });
+    }
+
+    Customer.updateById(req.params.customerId,
+        new Customer(req.body),
+        (err, data) => {
+            if (err) {
+                if (err.kind === "not_found") {
+                    res.status(404).json({
+                        message: `Customer Not found with id ${req.params.customerId}`
+                    });
+                } else {
+                    res.status(500).json({
+                        message: `Error Updating Customer with id ${req.params.customerId}`
+                    });
+                }
+            } else {
+                res.status(201).json({
+                    Updated_Customer: data
+                });
+            }
+        }
+    )
+}

@@ -23,4 +23,7 @@ app.get("/customers/:customerId", customers.findOne);
 //Retrive All Customer Data
 app.get("/customers", customers.findAll);
 
+//Update Customer by Custoemr ID
+app.put("/customers/:customerId", customers.update)
+
 module.exports = app;
