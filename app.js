@@ -1,7 +1,8 @@
 const express = require('express');
 const app = express();
 const bodyparser = require('body-parser');
-const customers = require('./model/customer.model');
+const customers = require('./controllers/customer.controller');
+
 
 app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({ extended: true }));
@@ -13,6 +14,13 @@ app.get("/", (req, res, next) => {
     });
 });
 
+//Creating a Customer
 app.post("/customers", customers.create);
+
+//Find a Customer by Customer ID
+app.get("/customers/:customerId", customers.findOne);
+
+//Retrive All Customer Data
+app.get("/customers", customers.findAll);
 
 module.exports = app;
