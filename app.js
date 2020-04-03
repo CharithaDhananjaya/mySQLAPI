@@ -3,7 +3,6 @@ const app = express();
 const bodyparser = require('body-parser');
 const customers = require('./controllers/customer.controller');
 
-
 app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({ extended: true }));
 
